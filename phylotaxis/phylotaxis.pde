@@ -14,10 +14,10 @@ void setup()
 	noStroke();
 	cx = width * 0.5;
 	cy = height * 0.5;
-	angle_in_rads = turns * 2 * PI;
-	while (angle_in_rads > 2 * PI)
+	angle_in_rads = turns * TWO_PI;
+	while (angle_in_rads > TWO_PI)
 	{
-		angle_in_rads -= 2.0 * PI;
+		angle_in_rads -= TWO_PI;
 	}
 	angle = angle_in_rads * 180.0 / PI;
 	while (angle > 360)

@@ -35,7 +35,7 @@ void getFullBall()
 		candidate = new Ball(random(ball_size, width - ball_size), random(ball_size, height - ball_size), ball_size, init_vel, 100);
 		for (Ball currBall : balls)
 		{
-			if (currBall.pos.dist(candidate.pos) < (currBall.size + candidate.size) / 2)
+			if (currBall.pos.dist(candidate.pos) < (currBall.size + candidate.size) * 0.5)
 			{
 				good_candidate = false;
 			}
@@ -53,7 +53,7 @@ void draw()
 {
 	background(0);
 	lights();
-	translate(-width / 2, -height / 2);
+	translate(-width * 0.5, -height * 0.5);
 	drawBorder();
 	for (int i = 0; i < balls.size(); i++)
 	{

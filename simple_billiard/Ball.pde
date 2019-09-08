@@ -24,7 +24,7 @@ class Ball
 		pos.add(vel);
 		acc.mult(0);
 
-		float r = size / 2;
+		float r = size * 0.5;
 
 		if (pos.x - r < 0 || pos.x + r > width)
 		{
@@ -45,7 +45,7 @@ class Ball
 	void collide(Ball otherBall)
 	{
 		float d = PVector.dist(pos, otherBall.pos);
-		if (d <= (size + otherBall.size) / 2)
+		if (d <= (size + otherBall.size) * 0.5)
 		{
 			//println("collide!");
 			float theta = -atan2(otherBall.pos.y - pos.y, otherBall.pos.x - pos.x);

@@ -10,8 +10,8 @@ void setup()
 {
 	size(1000, 400);
 	textSize(16);
-	target = new Ball(width / 2, height / 2, 16);
-	player = new Ball(50, height / 2, 16);
+	target = new Ball(width * 0.5, height * 0.5, 16);
+	player = new Ball(50, height * 0.5, 16);
 	noStroke();
 }
 void draw()
@@ -19,7 +19,7 @@ void draw()
 	background(0);
 	stroke(255);
 	fill(255);
-	line(width / 2, height / 2, width, height / 2);
+	line(width * 0.5, height * 0.5, width, height * 0.5);
 	mouseV = new PVector(mouseX, mouseY);
 	playerXline = new PVector(width, player.pos.y).sub(player.pos);
 	getOpposite();
@@ -80,8 +80,8 @@ void mouseClicked()
     loop();
 		target.vel.mult(0);
 		player.vel.mult(0);
-		target.pos.set(new PVector(width / 2, height / 2));
-		player.pos.set(new PVector(50, height / 2));
+		target.pos.set(new PVector(width * 0.5, height * 0.5));
+		player.pos.set(new PVector(50, height * 0.5));
 		player.forceApplied = false;
 	}
 }

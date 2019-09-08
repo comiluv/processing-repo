@@ -30,7 +30,7 @@ class Ball
 
 	void hitWall()
 	{
-		float r = size / 2;
+		float r = size * 0.5;
 		if (pos.x + r >= width && vel.x > 0 || pos.x - r <= 0 && vel.x < 0)
 		{
 			vel.x *= -1;
@@ -48,7 +48,7 @@ class Ball
 	void collide(Ball otherBall)
 	{
 		float d = PVector.dist(pos, otherBall.pos);
-		if (d <= (size + otherBall.size) / 2 && PVector.dot(PVector.sub(vel, otherBall.vel), PVector.sub(otherBall.pos, pos)) > 0)
+		if (d <= (size + otherBall.size) * 0.5 && PVector.dot(PVector.sub(vel, otherBall.vel), PVector.sub(otherBall.pos, pos)) > 0)
 		{
 			//float tempx, tempy;
 			//tempx = vel.x;
@@ -130,7 +130,7 @@ class Ball
 		noStroke();
 		pushMatrix();
 		translate(pos.x, pos.y, 0);
-		sphere(size / 2);
+		sphere(size * 0.5);
 		popMatrix();
 	}
 }

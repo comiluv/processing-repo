@@ -104,7 +104,7 @@ void draw()
 	def2 = (PI - angle) / 2;
 	mag1 = distance * (sqrt(sq(player.mass) + sq(target.mass) + 2 * player.mass * target.mass * cos(angle))
 	                   / (player.mass + target.mass));
-	mag2 = distance * ((2 * player.mass) / (player.mass + target.mass)) * sin(angle / 2);
+	mag2 = distance * ((2 * player.mass) / (player.mass + target.mass)) * sin(angle * 0.5);
 	vdef1 = -atan2(newvecv1.y, newvecv1.x);
 	vdef2 = -atan2(newvecv2.y, newvecv2.x);
 	text("angle " + degrees(angle), 30, 30);
@@ -158,11 +158,11 @@ void draw()
 	pushMatrix();
 	if (mouseY > target.pos.y)
 	{
-		translate(width / 2 - distance / 2, 50);
+		translate(width * 0.5 - distance * 0.5, 50);
 	}
 	else
 	{
-		translate(width / 2 - distance / 2, height - 50);
+		translate(width * 0.5 - distance * 0.5, height - 50);
 	}
 	//redline
 	stroke(255, 0, 0);
@@ -187,7 +187,7 @@ void draw()
 	//normal line
 	line(projection.pos.x, projection.pos.y, target.pos.x, target.pos.y);
 	pushMatrix();
-	translate(projection.pos.x + projection.size / 2 * cos(angle), projection.pos.y - projection.size / 2 * sin(angle));
+	translate(projection.pos.x + projection.size * 0.5 * cos(angle), projection.pos.y - projection.size * 0.5 * sin(angle));
 	rotate(-angle);
 	line(0, 0, 0, target_size);
 	line(0, 0, 0, -target_size);
@@ -216,8 +216,8 @@ void calcProjection()
 	float b = -2 * x1;
 	//sq(y1 - y0) + sq(x1 - x0) = sq(2*init_size);
 	//sq(x0) -2*x1*x0 = sq(2*init_size) - sq(y1 - y0) - sq(x1)
-	ans1 = (-b + sqrt(sq(2 * x1) + 4 * ac)) / 2;
-	ans2 = (-b - sqrt(sq(2 * x1) + 4 * ac)) / 2;
+	ans1 = (-b + sqrt(sq(2 * x1) + 4 * ac)) * 0.5;
+	ans2 = (-b - sqrt(sq(2 * x1) + 4 * ac)) * 0.5;
 	//println(ans1);
 	//println(ans2);
 	projection.pos.x = ans1 < ans2 ? ans1 : ans2;

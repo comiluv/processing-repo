@@ -5,7 +5,7 @@ float chance = 1;
 int txtSize = 32;
 int[] scrnResult;
 int[] theResult, medianResult, modeResult;
-int mean, median, mode;
+float mean, median, mode;
 
 void setup()
 {
@@ -51,7 +51,7 @@ void draw()
 	line(mean, 0, mean, height);
 	fill(0, 255, 0, 255);
 	stroke(0, 255, 0, 255);
-	text("mode " + mode + "   " + theResult[mode], 3 * width / 5, height / 3 + txtSize);
+	text("mode " + mode + "   " + theResult[(int)mode], 3 * width / 5, height / 3 + txtSize);
 	line(mode, 0, mode, height);
 	fill(0, 0, 255, 255);
 	stroke(0, 0, 255, 255);
@@ -121,7 +121,7 @@ void getResult()
 		medianResult[i] = gamblers[i].tries;
 	}
 	//println(theResult);
-	mean = totalTries / gamblers.length;
+	mean = 1.0 * totalTries / gamblers.length;
 	float medianIndex = 0;
 
 	// getting the mode value. loop through theResult[num of tries] = num of gamblers array
@@ -129,7 +129,7 @@ void getResult()
 
 	for (int i = 0; i < theResult.length; i++)
 	{
-		if (theResult[i] > theResult[mode])
+		if (theResult[i] > theResult[(int)mode])
 		{
 			mode = i;
 		}
@@ -140,14 +140,14 @@ void getResult()
 	// if number of elements is not odd, get two values at number of elements in the array / 2 and +1 of that
 	// and get the average.
 	medianResult = sort(medianResult);
-	medianIndex = (medianResult.length + 1) / 2 - 1;
+	medianIndex = (medianResult.length + 1) * 0.5 - 1;
 	if ((medianResult.length) % 2 != 0)
 	{
-		median = medianResult[(medianResult.length + 1) / 2 - 1]; //start from zero
+		median = medianResult[(int)((medianResult.length + 1) * 0.5 - 1)]; //start from zero
 	}
 	else
 	{
-		median = (medianResult[(medianResult.length) / 2 - 1] + medianResult[(medianResult.length) / 2]) / 2;
+		median = (medianResult[(int)((medianResult.length) *0.5 - 1)] + medianResult[(int)((medianResult.length) *0.5)]) * 0.5;
 	}
 }
 
