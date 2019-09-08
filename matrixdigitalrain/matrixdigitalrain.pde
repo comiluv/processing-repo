@@ -3,7 +3,7 @@
 // https://www.youtube.com/watch?v=S1TQCi9axzg
 // ported and modified to processing.java
 
-Stream[] streams; 
+Stream[] streams;
 String fntName = "Yu Gothic UI";
 PFont fnt;
 int symbolSize = 14;
@@ -14,10 +14,10 @@ void setup()
 {
 	fnt = createFont(fntName, symbolSize);
 	size(1600, 800);
-    // fullScreen();
+	background(0);
+	// fullScreen();
 	textFont(fnt);
 	textSize(symbolSize);
-
 	streams = new Stream[floor(width / symbolSize)];
 	int x = 0;
 	for (int i = 0; i < width / symbolSize; i++)
@@ -30,7 +30,8 @@ void setup()
 }
 void draw()
 {
-	background(0);
+	fill(0, 150);
+	rect(0, 0, width, height);
 	for (Stream stream : streams)
 	{
 		stream.render();
