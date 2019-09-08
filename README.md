@@ -32,3 +32,5 @@ simple_billiard: stuff I made to get grasp on making manyballs
 snakegame: that snake game
 
 starfield: that starfield
+
+write_on_effect: write on effect implemenetation from https://forum.processing.org/one/topic/write-on-effect.html
