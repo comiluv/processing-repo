@@ -23,7 +23,7 @@ void setup()
 {
 	size(800, 800);
 	//font = createFont("c:\\windows\\fonts\\ALGER.TTF", 96);
-	//font = createFont("C:\\Users\\choij\\AppData\\Local\\Microsoft\\Windows\\Fonts\\AbrilFatface-Regular.ttf", 96);
+	//font = createFont("C:\\windows\\fonts\\\AbrilFatface-Regular.ttf", 96);
 	//font = createFont(fontPath, int(width * 0.7));
 	RG.init(this);
 
@@ -55,11 +55,11 @@ void drawNoiseBackground(int _n, PGraphics _graphics)
 void init()
 {
 	pallete = new IntList();
-	pallete.append(# 50514f);
-	pallete.append(# f25f5c);
-	pallete.append(# ffe066);
-	pallete.append(# 247ba0);
-	pallete.append(# 70c1b3);
+	pallete.append(#50514f);
+	pallete.append(#f25f5c);
+	pallete.append(#ffe066);
+	pallete.append(#247ba0);
+	pallete.append(#70c1b3);
 	movers = new ArrayList <Mover> ();
 	//char txt = (alphabet.charAt(int(random(0, alphabet.length()))));
 	String txt = Character.toString(alphabet.charAt(int(random(0, alphabet.length()))));
