@@ -3,7 +3,7 @@
 // https://www.openprocessing.org/sketch/482860/ this looks like an iterative solution
 // Jaeho Choi
 
-int numDisks = 9;
+int numDisks = 10;
 int stepSol = 0;
 boolean useMouseClick = false; // set this to true to use mouse click every move
 float sleepInterval = 0.1; // interval between moves in seconds
@@ -38,9 +38,11 @@ void draw()
 	else
 	{
 		background(51, 255);
+		textAlign(LEFT);
 		textSize(txtSize);
 		fill(255);
 		text(stepSol / 3, 0, txtSize);
+		text((100.0 * (stepSol / 3) / maxSteps) + "%", 0, 2 * txtSize);
 		// draw towers
 		fill(100, 80, 20);
 		// source tower (left)
@@ -69,7 +71,7 @@ void draw()
 		if (stepSol > recSolution.size() - 3)
 		{
 			fill(255);
-			text("Done", 0, txtSize * 2);
+			text("Done", 0, txtSize * 3);
 			println("done");
 			noLoop();
 		}
