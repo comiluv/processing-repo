@@ -1,5 +1,5 @@
 # processing-repo
-processing.java and processing.p5js files inspired by CodingTrain youtube tutorial series.
+processing.java and processing.p5js files many of which are inspired by CodingTrain youtube tutorial series.
 
 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH
 
@@ -24,6 +24,8 @@ phylotaxis: circular flowerish pattern. also see https://www.youtube.com/watch?v
 purplerain: rains in purplerain
 
 simple_billiard: stuff I made to get grasp on making manyballs
+
+tower of hanoi: visualize tower of hanoi problem solving using recursion
 
 2delasticcollision: demonstrating ball to ball collision in 2D
 
