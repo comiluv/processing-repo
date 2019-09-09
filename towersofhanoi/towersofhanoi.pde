@@ -3,7 +3,7 @@
 // https://www.openprocessing.org/sketch/482860/ this looks like an iterative solution
 // Jaeho Choi
 
-int numDisks = 10;
+int numDisks = 20;
 int stepSol = 0;
 boolean useMouseClick = false; // set this to true to use mouse click every move
 float sleepInterval = 0.1; // interval between moves in seconds
@@ -14,6 +14,7 @@ float txtSize = 14;
 int maxSteps = (int)pow(2, numDisks) - 1;
 // https://www.google.com/search?q=volatile+boolean
 volatile boolean doneLoading = false;
+boolean started = false;
 void setup()
 {
 	size(800, 600);
@@ -35,8 +36,9 @@ void draw()
 	{
 		showLoadingScreen();
 	}
-	else
+	else if (started || focused) // focused is a Processing boolean that flags whether current window is focused or not
 	{
+		started = true;
 		background(51, 255);
 		textAlign(LEFT);
 		textSize(txtSize);
@@ -83,6 +85,14 @@ void draw()
 		{
 			sleep(sleepInterval);
 		}
+	}
+	else
+	{
+		background(51, 255);
+		fill(255, frameCount % 255);
+		textAlign(CENTER);
+		textSize(width / 12);
+		text("DONE LOADING", width * 0.5, height * 0.5);
 	}
 }
 
