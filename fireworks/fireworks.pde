@@ -4,7 +4,6 @@ PVector gravity;
 void setup()
 {
 	size(800, 600);
-	colorMode(HSB);
 	gravity = new PVector(0, 0.1);
 	fireworks = new ArrayList <Firework> ();
 	stroke(255);
@@ -14,8 +13,9 @@ void setup()
 
 void draw()
 {
-	colorMode(RGB);
-	background(0, 0, 0, 2);
+	noStroke();
+	fill(0, 50);
+	rect(0, 0, width, height);
 	if (random(1) < 0.1)
 	{
 		fireworks.add(new Firework(random(width), height));
