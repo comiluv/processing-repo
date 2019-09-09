@@ -4,6 +4,7 @@ PVector gravity;
 void setup()
 {
 	size(800, 600);
+	colorMode(HSB);
 	gravity = new PVector(0, 0.1);
 	fireworks = new ArrayList <Firework> ();
 	stroke(255);

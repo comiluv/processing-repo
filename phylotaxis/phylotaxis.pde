@@ -38,7 +38,7 @@ void draw()
 		float x = r * cos(a) + cx;
 		float y = r * sin(a) + cy;
 		float d = dist(x, y, cx, cy);
-		fill(a % 256, 255, 255);
+		fill(a % 360, 255, 255);
 		d = map(d, 0, dist(0, 0, cx, cy), 0, 255);
 		ellipse(x, y, size, size);
 		if (abs(x) > abs(width) && abs(y) > abs(height))

@@ -54,7 +54,7 @@ class Ball
 			tempx = vel.x;
 			tempy = vel.y;
 			//println("collide!");
-			hu = random(255);
+			hu = random(360);
 			otherBall.hu = hu;
 			float theta = -atan2(otherBall.pos.y - pos.y, otherBall.pos.x - pos.x);
 			PVector u1, u2;
