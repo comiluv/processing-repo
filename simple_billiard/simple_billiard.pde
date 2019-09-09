@@ -77,11 +77,7 @@ void mouseClicked()
 	}
 	if (mouseButton == RIGHT)
 	{
-    loop();
-		target.vel.mult(0);
-		player.vel.mult(0);
-		target.pos.set(new PVector(width * 0.5, height * 0.5));
-		player.pos.set(new PVector(50, height * 0.5));
-		player.forceApplied = false;
+		setup();
+		loop();
 	}
 }
