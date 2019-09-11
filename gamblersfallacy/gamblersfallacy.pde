@@ -6,12 +6,17 @@ int txtSize = 32;
 int[] scrnResult;
 int[] theResult, medianResult, modeResult;
 float mean, median, mode;
-
+volatile boolean doneCalc = false;
 void setup()
 {
 	size(400, 400);
 	textSize(txtSize);
 	noStroke();
+	thread("calculateResult");
+}
+
+void calculateResult()
+{
 	// make a gambler array that contains numGamblers number of gamblers
 	gamblers = new Gambler[numGamblers];
 	for (int i = 0; i < numGamblers; i++)
@@ -24,69 +29,87 @@ void setup()
 	while (totalDone < gamblers.length)
 	{
 		gambletick();
-		println(String.format("%d out of %d gamblers done", totalDone, gamblers.length));
+		// println(String.format("%d out of %d gamblers done", totalDone, gamblers.length));
 	}
 	//println("finished gambling at " + totalDone);
 
 	// analyze the result by its representative values mean mode and median.
 	getResult();
 	//println(totalTries);
+	doneCalc = true;
+}
+
+void showLoadingScreen()
+{
+	background(51);
+	textSize(txtSize);
+	textAlign(CENTER);
+	fill(frameCount % 100);
+	text("LOADING", width * 0.5, height * 0.5);
 }
 
 void draw()
 {
-	background(0);
-	textSize(16);
-	stroke(255);
-
-	// print result
-	println("mean " + mean);
-	println("mode " + mode);
-	println("median " + median);
-	// draw R mean G mode B median vertical lines
-
-	fill(255, 0, 0, 255);
-	stroke(255, 0, 0, 255);
-	text("mean " + mean, 3 * width / 5, height / 3);
-	line(mean, 0, mean, height);
-	fill(0, 255, 0, 255);
-	stroke(0, 255, 0, 255);
-	text("mode " + mode + "   " + theResult[(int)mode], 3 * width / 5, height / 3 + txtSize);
-	line(mode, 0, mode, height);
-	fill(0, 0, 255, 255);
-	stroke(0, 0, 255, 255);
-	text("median " + median, 3 * width / 5, height / 3 + 2 * txtSize);
-	line(median, 0, median, height);
-	fill(255);
-	stroke(255, 255);
-	text("minTries " + minTries, 3 * width / 5, height / 3 + 3 * txtSize);
-	text("maxTries " + maxTries, 3 * width / 5, height / 3 + 4 * txtSize);
-
-
-
-	// draw vertical grid
-	stroke(255, 50);
-	for (int i = 0; i < width / 100; i++)
+	if (!doneCalc)
 	{
-		line(i * 100, 0, i * 100, height);
+		showLoadingScreen();
 	}
-
-	// scale height of each bar that maximum height is about 80% of height of the screen and draw graph
-	stroke(255);
-	int barHeightMax = 0;
-	for (int i = 0; i < theResult.length; i++)
+	else
 	{
-		barHeightMax = barHeightMax < theResult[i] ? theResult[i] : barHeightMax;
-	}
-	println(barHeightMax);
-	for (int i = 0; i < theResult.length; i++)
-	{
-		float barHeight = theResult[i];
-		line(i, height, i, height - map(barHeight, 0, barHeightMax, 0, 0.8 * height));
-	}
+		background(0);
+		textAlign(LEFT);
+		textSize(16);
+		stroke(255);
 
-	println("done.");
-	noLoop();
+		// print result
+		println("mean " + mean);
+		println("mode " + mode);
+		println("median " + median);
+		// draw R mean G mode B median vertical lines
+
+		fill(255, 0, 0, 255);
+		stroke(255, 0, 0, 255);
+		text("mean " + mean, 3 * width / 5, height / 3);
+		line(mean, 0, mean, height);
+		fill(0, 255, 0, 255);
+		stroke(0, 255, 0, 255);
+		text("mode " + mode + "   " + theResult[(int)mode], 3 * width / 5, height / 3 + txtSize);
+		line(mode, 0, mode, height);
+		fill(0, 0, 255, 255);
+		stroke(0, 0, 255, 255);
+		text("median " + median, 3 * width / 5, height / 3 + 2 * txtSize);
+		line(median, 0, median, height);
+		fill(255);
+		stroke(255, 255);
+		text("minTries " + minTries, 3 * width / 5, height / 3 + 3 * txtSize);
+		text("maxTries " + maxTries, 3 * width / 5, height / 3 + 4 * txtSize);
+
+
+
+		// draw vertical grid
+		stroke(255, 50);
+		for (int i = 0; i < width / 100; i++)
+		{
+			line(i * 100, 0, i * 100, height);
+		}
+
+		// scale height of each bar that maximum height is about 80% of height of the screen and draw graph
+		stroke(255);
+		int barHeightMax = 0;
+		for (int i = 0; i < theResult.length; i++)
+		{
+			barHeightMax = barHeightMax < theResult[i] ? theResult[i] : barHeightMax;
+		}
+		println(barHeightMax);
+		for (int i = 0; i < theResult.length; i++)
+		{
+			float barHeight = theResult[i];
+			line(i, height, i, height - map(barHeight, 0, barHeightMax, 0, 0.8 * height));
+		}
+
+		println("done.");
+		noLoop();
+	}
 }
 
 void getResult()
