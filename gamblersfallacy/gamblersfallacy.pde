@@ -1,7 +1,7 @@
 Gambler[] gamblers;
 int numGamblers = 1000000;
 int totalTries, totalDone, minTries, maxTries;
-float chance = 1;
+float chance = 1.0;
 int txtSize = 32;
 int[] scrnResult;
 int[] theResult, medianResult, modeResult;
@@ -69,7 +69,6 @@ void draw()
 		println("mode " + mode);
 		println("median " + median);
 		println("representative value " + repValue);
-		println("standard deviation " + theStandardDeviation);
 		println("standard deviation using mean " + theStandardDeviation);
 		println("standard deviation using integer N " + theIntStandardDeviation);
 		// draw R mean G mode B median vertical lines
@@ -251,7 +250,10 @@ void getResult()
 		if (standardDeviation < theIntStandardDeviation)
 		{
 			theIntStandardDeviation = standardDeviation;
-			repValue = n;
+			if (theIntStandardDeviation < theStandardDeviation)
+			{
+				repValue = n;
+			}
 		}
 	}
 }
