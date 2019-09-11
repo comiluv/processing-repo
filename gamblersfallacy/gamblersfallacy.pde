@@ -5,11 +5,12 @@ float chance = 1;
 int txtSize = 32;
 int[] scrnResult;
 int[] theResult, medianResult, modeResult;
-float mean, median, mode;
+float mean, median, mode, theStandardDeviation, theIntStandardDeviation, repValue;
 volatile boolean doneCalc = false;
+
 void setup()
 {
-	size(400, 400);
+	size(800, 600);
 	textSize(txtSize);
 	noStroke();
 	thread("calculateResult");
@@ -17,6 +18,7 @@ void setup()
 
 void calculateResult()
 {
+	float startTime = millis();
 	// make a gambler array that contains numGamblers number of gamblers
 	gamblers = new Gambler[numGamblers];
 	for (int i = 0; i < numGamblers; i++)
@@ -36,6 +38,7 @@ void calculateResult()
 	// analyze the result by its representative values mean mode and median.
 	getResult();
 	//println(totalTries);
+	println("calculation time: " + 0.001 * (millis() - startTime) + " seconds");
 	doneCalc = true;
 }
 
@@ -44,7 +47,7 @@ void showLoadingScreen()
 	background(51);
 	textSize(txtSize);
 	textAlign(CENTER);
-	fill(frameCount % 100);
+	fill(frameCount % 256);
 	text("LOADING", width * 0.5, height * 0.5);
 }
 
@@ -65,26 +68,31 @@ void draw()
 		println("mean " + mean);
 		println("mode " + mode);
 		println("median " + median);
+		println("representative value " + repValue);
+		println("standard deviation " + theStandardDeviation);
+		println("standard deviation using mean " + theStandardDeviation);
+		println("standard deviation using integer N " + theIntStandardDeviation);
 		// draw R mean G mode B median vertical lines
 
 		fill(255, 0, 0, 255);
 		stroke(255, 0, 0, 255);
-		text("mean " + mean, 3 * width / 5, height / 3);
+		text("mean " + mean, 7 * width / 13, height / 3);
 		line(mean, 0, mean, height);
 		fill(0, 255, 0, 255);
 		stroke(0, 255, 0, 255);
-		text("mode " + mode + "   " + theResult[(int)mode], 3 * width / 5, height / 3 + txtSize);
+		text("mode " + (int)mode + "   " + theResult[(int)mode], 7 * width / 13, height / 3 + txtSize);
 		line(mode, 0, mode, height);
 		fill(0, 0, 255, 255);
 		stroke(0, 0, 255, 255);
-		text("median " + median, 3 * width / 5, height / 3 + 2 * txtSize);
+		text("median " + (int)median, 7 * width / 13, height / 3 + 2 * txtSize);
 		line(median, 0, median, height);
 		fill(255);
 		stroke(255, 255);
-		text("minTries " + minTries, 3 * width / 5, height / 3 + 3 * txtSize);
-		text("maxTries " + maxTries, 3 * width / 5, height / 3 + 4 * txtSize);
-
-
+		text("representative value " + repValue, 7 * width / 13, height / 3 + 3 * txtSize);
+		text("standard deviation using mean " + theStandardDeviation, 7 * width / 13, height / 3 + 4 * txtSize);
+		text("standard deviation using integer N " + theIntStandardDeviation, 7 * width / 13, height / 3 + 5 * txtSize);
+		text("minTries " + minTries, 7 * width / 13, height / 3 + 6 * txtSize);
+		text("maxTries " + maxTries, 7 * width / 13, height / 3 + 7 * txtSize);
 
 		// draw vertical grid
 		stroke(255, 50);
@@ -133,6 +141,10 @@ void getResult()
 	}
 
 	theResult = new int[maxTries + 1];
+	// +1 there because no gambler can succeed in 0 tries but it needs to be in there to plot a diagram,
+	// where x axis is number of tries and y axis is number of gamblers and read y amount of gamblers succeeded
+	// after doing x amount of tries
+
 	medianResult = new int[gamblers.length];
 
 	// theResult[num of tries] = num of gamblers who did that tries
@@ -171,6 +183,76 @@ void getResult()
 	else
 	{
 		median = (medianResult[(int)((medianResult.length) *0.5 - 1)] + medianResult[(int)((medianResult.length) *0.5)]) * 0.5;
+	}
+
+	// getting the standard deviation
+
+	// loop from 0 to theResult.length and get n which makes smallest standard deviation
+	// that n is the representative value and use that n to get The standard deviation
+	// in this specific scenario, representative value is about the mean value,
+	// but since it's impossible to loop through every real number in a given range, will be using integers instead
+	// therefore we might get wrong standard deviation in the end
+	// ¯\_(ツ)_/¯
+	// https://emojipedia.org/shrug/
+	// but to compare that with when using the mean value, let's just use the mean value first to get standard deviation and see if later calculated standard deviation
+	// by looping in integers is smaller than the previous one.
+	// because we're using float data type so there must be errors in this kind of calculation
+	// and computers can't handle infinite number of digits anyway (eg. 1/3 = 0.3333333... but in computers it's 0.33333333 that ends)
+	// i don't know... i just don't...
+
+	// get deviation array
+	repValue = mean;
+	float[] deviationArray = new float[gamblers.length];
+	for (int i = 0; i < deviationArray.length; i++)
+	{
+		deviationArray[i] = gamblers[i].tries - repValue;
+	}
+	// now square all values in deviation array and get them average to get variance
+	// make variance array
+	float[] varianceArray = new float[deviationArray.length];
+	float variance = 0;
+	for (int i = 0; i < varianceArray.length; i++)
+	{
+		varianceArray[i] = sq(deviationArray[i]);
+		variance += varianceArray[i];
+	}
+	// now get variance
+	variance /= varianceArray.length;
+
+	// now calculate standard deviation from variance
+	theStandardDeviation = sqrt(variance);
+
+	theIntStandardDeviation = Float.POSITIVE_INFINITY;
+	for (int n = 0; n < theResult.length; n++)
+	{
+		// get deviation array
+		deviationArray = new float[gamblers.length];
+		for (int i = 0; i < deviationArray.length; i++)
+		{
+			deviationArray[i] = gamblers[i].tries - n;
+		}
+		// now square all values in deviation array and get them average to get variance
+		// make variance array
+		varianceArray = new float[deviationArray.length];
+		variance = 0;
+		for (int i = 0; i < varianceArray.length; i++)
+		{
+			varianceArray[i] = sq(deviationArray[i]);
+			variance += varianceArray[i];
+		}
+		// now get variance
+		variance /= varianceArray.length;
+
+		// now calculate standard deviation from variance
+		float standardDeviation = sqrt(variance);
+
+		// if current standard deviation is lesser than the record value, this is the new The standard deviation
+		// and n is the representative value that gives least of standard deviation
+		if (standardDeviation < theIntStandardDeviation)
+		{
+			theIntStandardDeviation = standardDeviation;
+			repValue = n;
+		}
 	}
 }
 
