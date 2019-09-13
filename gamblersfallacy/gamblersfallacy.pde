@@ -18,7 +18,7 @@ void setup()
 
 void calculateResult()
 {
-	float startTime = millis();
+	int startTime = millis();
 	// make a gambler array that contains numGamblers number of gamblers
 	gamblers = new Gambler[numGamblers];
 	for (int i = 0; i < numGamblers; i++)
