@@ -9,7 +9,7 @@ fireworks: fireworks from Coding Train series
 
 fractaltrees: fractaltrees from Coding Train series, added GUI with g4p library
 
-gamblersfallacy: 1 million gamblers going for 1% chance, shows mean mode median
+gamblersfallacy: 1 million gamblers going for 1% chance, shows mean mode median standard deviation
 
 manyballs: balls doing 2 dimensional elastic collision
 
