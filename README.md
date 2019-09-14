@@ -3,6 +3,8 @@ processing.java and processing.p5js files many of which are inspired by CodingTr
 
 https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH
 
+AStarPathfinding: A* pathfinding algorithm visualization from CodingTrain tutorial updated with start and reset buttons and drag the mouse to draw wall functionality 
+
 display_angle: displays angle between mid point (width*0.5, height*0.5) and mouse cursor and demonstrates to consider relationship between atan2 and angleBetween method
 
 fireworks: fireworks from Coding Train series
@@ -10,6 +12,8 @@ fireworks: fireworks from Coding Train series
 fractaltrees: fractaltrees from Coding Train series, added GUI with g4p library
 
 gamblersfallacy: 1 million gamblers going for 1% chance, shows mean mode median standard deviation
+
+gridandneighbors: mouse over single array of grid to display what the mouse is pointing and its neighbors
 
 manyballs: balls doing 2 dimensional elastic collision
 
