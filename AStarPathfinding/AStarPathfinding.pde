@@ -2,6 +2,7 @@ int cols = 100;
 int rows = 100;
 float spotw, spoth;
 float wallChance = 0.3;
+float buttonWidth = 100;
 ArrayList <Spot> grid = new ArrayList <Spot> ();
 ArrayList <Spot> openSet = new ArrayList <Spot> ();
 ArrayList <Spot> closedSet = new ArrayList <Spot> ();
@@ -16,16 +17,17 @@ Spot end;
 Spot current;
 
 boolean bStart = false;
+
 void setup()
 {
-	size(600, 600);
+	size(500, 500);
 	grid = new ArrayList <Spot> ();
 	openSet = new ArrayList <Spot> ();
 	closedSet = new ArrayList <Spot> ();
 	path = new ArrayList <Spot> ();
 	buttons = new ArrayList <Button> ();
-	startButton = new Button("START", 400, 1, 100, 40);
-	resetButton = new Button("RESET", 500, 1, 100, 40);
+	startButton = new Button("START", width - 2 * buttonWidth, 1, buttonWidth, 40);
+	resetButton = new Button("RESET", width - 1 * buttonWidth, 1, buttonWidth, 40);
 	buttons.add(startButton);
 	buttons.add(resetButton);
 	bStart = false;
@@ -53,6 +55,7 @@ void setup()
 	openSet.add(start);
 }
 
+// https://tips4java.wordpress.com/2009/06/14/moving-windows/
 void mouseClicked()
 {
 	Button b;
@@ -68,26 +71,41 @@ void mouseClicked()
 	}
 }
 
-void mouseDragged()
-{
-	boolean onButton = false;
-	for (Button b : buttons)
-	{
-		if (b.mouseOver())
-		{
-			onButton = true;
-			break;
-		}
-	}
-	if (!bStart && !onButton && mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height)
-	{
-		Spot s;
-		s = grid.get(
-			int(mouseX / spotw) + int(mouseY / spoth) * cols);
-		s.wall = true;
-	}
+void mouseReleased()  {
+  for (Button b: buttons) {
+    b.releaseEvent();
+  }
 }
 
+void mouseDragged()
+{
+	if (!bStart)
+	{
+		boolean onButton = false;
+		for (Button b : buttons)
+		{
+			if (b.mouseOver())
+			{
+				onButton = true;
+				break;
+			}
+		}
+		if (!onButton && mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height)
+		{
+			Spot s;
+			s = grid.get(
+				int(mouseX / spotw) + int(mouseY / spoth) * cols);
+			if (mouseButton == LEFT)
+			{
+				s.wall = true;
+			}
+			else if (mouseButton == RIGHT)
+			{
+				s.wall = false;
+			}
+		}
+	}
+}
 
 float heuristic(Spot a, Spot b)
 {

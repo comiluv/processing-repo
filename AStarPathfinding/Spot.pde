@@ -29,8 +29,8 @@ class Spot
 				if (s.wall)
 				{
 					stroke(0);
-					strokeWeight(spotw*0.5);
-					line((x+0.5)*spotw,(y+0.5)*spoth,(s.x+0.5)*spotw,(s.y+0.5)*spoth);
+					strokeWeight(spotw * 0.5);
+					line((x + 0.5) * spotw, (y + 0.5) * spoth, (s.x + 0.5) * spotw, (s.y + 0.5) * spoth);
 					// rectMode(CORNERS);
 					// if (x == s.x)
 					// {
@@ -81,37 +81,23 @@ class Spot
 	}
 	void addNeighbors()
 	{
-		if (x + 1 < cols)
+		for (int i = -1; i <= 1; i++)
 		{
-			neighbors.add(grid.get((x + 1) + y * cols));
-		}
-		if (x > 0)
-		{
-			neighbors.add(grid.get((x - 1) + y * cols));
-		}
-		if (y + 1 < rows)
-		{
-			neighbors.add(grid.get(x + (y + 1) * cols));
-		}
-		if (y > 0)
-		{
-			neighbors.add(grid.get(x + (y - 1) * cols));
-		}
-		if (x > 0 && y > 0)
-		{
-			neighbors.add(grid.get(x - 1 + (y - 1) * cols));
-		}
-		if (x + 1 < cols && y > 0)
-		{
-			neighbors.add(grid.get(x + 1 + (y - 1) * cols));
-		}
-		if (x > 0 && y + 1 < rows)
-		{
-			neighbors.add(grid.get(x - 1 + (y + 1) * cols));
-		}
-		if (x + 1 < cols && y + 1 < rows)
-		{
-			neighbors.add(grid.get(x + 1 + (y + 1) * cols));
+			int isum = x + i;
+			if (isum < 0 || isum > cols - 1)
+				continue;
+			for (int j = -1; j <= 1; j++)
+			{
+				int jsum = y + j;
+				if (jsum < 0 || jsum > rows - 1)
+					continue;
+
+				Spot s = grid.get(isum + jsum * cols);
+
+				if (x == s.x && y == s.y)
+					continue;
+				neighbors.add(s);
+			}
 		}
 	}
 
