@@ -2,7 +2,7 @@ ArrayList <Circle> circles;
 ArrayList <PVector> spots;
 int attemptsMax = 1000;
 int attempts = 0;
-float mouseR = 50;
+float mouseR = 100;
 float mouseStrength = 5;
 boolean doneGrowing = false;
 PImage img;

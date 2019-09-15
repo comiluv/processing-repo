@@ -36,9 +36,9 @@ class Circle
 		PVector desired = PVector.sub(target, new PVector(x, y));
 		float d = desired.mag();
 		float speed = maxspeed;
-		if (d < 100)
+		if (d < mouseR)
 		{
-			speed = map(d, 0, 100, 0, maxspeed);
+			speed = map(d, 0, mouseR, 0, maxspeed);
 		}
 		desired.setMag(speed);
 		PVector steer = PVector.sub(desired, vel);
