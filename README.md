@@ -29,6 +29,8 @@ purplerain: rains in purplerain
 
 simple_billiard: stuff I made to get grasp on making manyballs
 
+SteeringBehaviors: circle packing and steering behaviors packed into one
+
 tower of hanoi: visualize tower of hanoi problem solving using recursion
 
 2delasticcollision: demonstrating ball to ball collision in 2D
