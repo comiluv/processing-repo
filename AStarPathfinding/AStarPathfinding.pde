@@ -79,7 +79,7 @@ void mouseDragged()
 			break;
 		}
 	}
-	if (!bStart && !onButton)
+	if (!bStart && !onButton && mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height)
 	{
 		Spot s;
 		s = grid.get(
