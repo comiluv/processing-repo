@@ -1,44 +1,83 @@
 # processing-repo
-processing.java and processing.p5js files many of which are inspired by CodingTrain youtube tutorial series.
 
-https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH
+processing.java and processing.p5js files many of which are inspired by [CodingTrain youtube tutorial series](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH)
 
-AStarPathfinding: A* pathfinding algorithm visualization from CodingTrain tutorial updated with start and reset buttons and drag the mouse to draw wall functionality 
+## AStarPathfinding
 
-display_angle: displays angle between mid point (width\*0.5, height\*0.5) and mouse cursor and demonstrates to consider relationship between atan2 and angleBetween method
+ A* pathfinding algorithm visualization from CodingTrain tutorial updated with start and reset buttons and drag the mouse to draw wall functionality
 
-fireworks: fireworks from Coding Train series
+## display_angle
 
-fractaltrees: fractaltrees from Coding Train series, added GUI with g4p library
+ displays angle between mid point (width\*0.5, height\*0.5) and mouse cursor and demonstrates to consider relationship between atan2 and angleBetween method
 
-gamblersfallacy: 1 million gamblers going for 1% chance, shows mean mode median standard deviation
+## fireworks
 
-gridandneighbors: mouse over single array of grid to display what the mouse is pointing and its neighbors
+fireworks from Coding Train series
 
-manyballs: balls doing 2 dimensional elastic collision
+## fractaltrees
 
-manyballs3d: doing above in 3d
+ fractaltrees from Coding Train series, added GUI with g4p library
 
-matrixdigitalrain: matrix digital rain, this one isn't from Coding Challenges series, its from Guest Tutorial series https://www.youtube.com/watch?v=S1TQCi9axzg
+## gamblersfallacy
 
-metaballs: metaballs merging and doing stuffs
+ 1 million gamblers going for 1% chance, shows mean mode median standard deviation
 
-phylotaxis: circular flowerish pattern. also see https://www.youtube.com/watch?v=sj8Sg8qnjOg&t=121s
+## gridandneighbors
 
-purplerain: rains in purplerain
+ mouse over single array of grid to display what the mouse is pointing and its neighbors
 
-simple_billiard: stuff I made to get grasp on making manyballs
+## manyballs
 
-SteeringBehaviors: circle packing and steering behaviors packed into one
+ balls doing 2 dimensional elastic collision
 
-tower of hanoi: visualize tower of hanoi problem solving using recursion
+## manyballs3d
 
-2delasticcollision: demonstrating ball to ball collision in 2D
+ doing above in 3d
 
-190923: port of work by takao to processing.java at openprocessing.org https://www.openprocessing.org/sketch/744387
+## matrixdigitalrain
 
-snakegame: that snake game
+ matrix digital rain, this one isn't from Coding Challenges series, its from [Guest Tutorial series](https://www.youtube.com/watch?v=S1TQCi9axzg)
 
-starfield: that starfield
+## metaballs
 
-write_on_effect: write on effect implemenetation from https://forum.processing.org/one/topic/write-on-effect.html
+ metaballs merging and doing stuffs
+
+## phylotaxis
+
+ circular flowerish pattern. also see [related Numberphile's youtube video](https://www.youtube.com/watch?v=sj8Sg8qnjOg&t=121s)
+
+## purplerain
+
+ rains in purplerain
+
+## simple_billiard
+
+ stuff I made to get grasp on making manyballs
+
+## SteeringBehaviors
+
+circle packing and steering behaviors packed into one
+
+## tower of hanoi
+
+ visualize tower of hanoi problem solving using recursion
+
+## 2delasticcollision
+
+ demonstrating ball to ball collision in 2D
+
+## 190923
+
+ port of [work by takao](https://www.openprocessing.org/sketch/744387) to processing.java at openprocessing.org
+
+## snakegame
+
+ that snake game
+
+## starfield
+
+ that starfield
+
+## write_on_effect
+
+ write on effect implemenetation from a forum [post](https://forum.processing.org/one/topic/write-on-effect.html)

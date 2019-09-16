@@ -20,7 +20,7 @@ public class Button
 	void show()
 	{
 		pressEvent();
-		if (!bStart && pressed && dragged())
+		if (!bStart && dragged())
 		{
 			x = mouseX - widthButton * 0.5;
 			y = mouseY - heightButton * 0.5;
@@ -37,7 +37,7 @@ public class Button
 
 	boolean dragged()
 	{
-		return (pmouseX != mouseX || pmouseY != mouseY);
+		return !(!pressed || pmouseX == mouseX && pmouseY == mouseY);
 	}
 
 
