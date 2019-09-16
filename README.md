@@ -5,7 +5,7 @@ https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZiZxtDDRCi6uhfTH4FilpH
 
 AStarPathfinding: A* pathfinding algorithm visualization from CodingTrain tutorial updated with start and reset buttons and drag the mouse to draw wall functionality 
 
-display_angle: displays angle between mid point (width*0.5, height*0.5) and mouse cursor and demonstrates to consider relationship between atan2 and angleBetween method
+display_angle: displays angle between mid point (width\*0.5, height\*0.5) and mouse cursor and demonstrates to consider relationship between atan2 and angleBetween method
 
 fireworks: fireworks from Coding Train series
 
