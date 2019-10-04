@@ -81,3 +81,31 @@ circle packing and steering behaviors packed into one
 ## write_on_effect
 
  write on effect implemenetation from a forum [post](https://forum.processing.org/one/topic/write-on-effect.html)
+
+## knots
+
+visualizing a knot
+
+## langtonsant
+
+Langton's ant drawing
+
+## floydsteinbergdithering
+
+Floyd-Steinberg dithering of a picture
+
+## doublependulum
+
+Tracing the center of mass of a double pendulum
+
+## approximatingPi
+
+approximating Pi in relation to area of a circle to a square
+
+## visualizePi
+
+I don't know what it is
+
+## bookofPi one and two
+
+book of Pi which visualizes every digit of pi up to 1 or 10 million representing in color of a square.
