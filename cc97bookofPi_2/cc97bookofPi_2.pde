@@ -28,7 +28,7 @@ setup() {
 
 	float totalPages = pi.length() / (cols * rows);
 
-	for (int i = 0; i < totalPages; ++i) {
+	for (int i = 0; i <= totalPages; ++i) {
 		for (float y = 0; y < height; y += h) {
 			for (float x = 0; x < width; x += w) {
 				int digit = int("" + pi.charAt(index));

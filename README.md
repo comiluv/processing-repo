@@ -28,7 +28,7 @@ fireworks from Coding Train series
 
 ## manyballs
 
- balls doing 2 dimensional elastic collision
+ balls doing 2 dimensional elastic collision, updated to work on quadtrees
 
 ## manyballs3d
 
@@ -109,3 +109,15 @@ I don't know what it is
 ## bookofPi one and two
 
 book of Pi which visualizes every digit of pi up to 1 or 10 million representing in color of a square.
+
+## may the fourth scrolling text
+
+starwars day celebration
+
+## water ripple 2d
+
+water ripple visulization in 2d
+
+## fire effect
+
+take on visulizing fire effect from three different sources

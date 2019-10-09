@@ -1,5 +1,4 @@
-class Ball
-{
+class Ball {
 	PVector pos;
 	float size;
 	float mass;
@@ -7,53 +6,49 @@ class Ball
 	PVector acc;
 	float hu;
 
-	Ball(float x, float y, float s, PVector in_vel, float h)
-	{
+	Ball(float x, float y, float s, PVector in_vel, float h) {
 		pos = new PVector(x, y);
 		size = s;
-		mass = sq(size) / QUARTER_PI;
+		mass = size * size * PI;
 		hu = h;
 		vel = in_vel;
 		acc = new PVector(0, 0, 0);
 	}
 
-	void update()
-	{
+	void
+	update() {
 		vel.add(acc);
-		hitWall();
 		pos.add(vel);
+		hitWall();
 
 		acc.mult(0);
 	}
 
-	void hitWall()
-	{
+	void
+	hitWall() {
 		float r = size * 0.5;
-		if (pos.x + r >= width && vel.x > 0 || pos.x - r <= 0 && vel.x < 0)
-		{
+		if (pos.x + r >= width && vel.x > 0 || pos.x - r <= 0 && vel.x < 0) {
 			vel.x *= -1;
-			//HACK
+			// HACK
 			// pos.x = pos.x + r >= width ? width - r : r;
 		}
-		if (pos.y + r >= height && vel.y > 0 || pos.y - r <= 0 && vel.y < 0)
-		{
+		if (pos.y + r >= height && vel.y > 0 || pos.y - r <= 0 && vel.y < 0) {
 			vel.y *= -1;
-			//HACK
+			// HACK
 			// pos.y = pos.y + r >= height ? height - r : r;
 		}
 	}
 
-	void collide(Ball otherBall)
-	{
+	void
+	collide(Ball otherBall) {
 		float d = PVector.dist(pos, otherBall.pos);
-		//https://matthew-brett.github.io/teaching/rotation_2d.html#equation-x-1-y-1
-		//https://codepen.io/Full_of_Symmetries/pen/qqazdW?editors=0010#0
-		if (d <= (size + otherBall.size) * 0.5 && PVector.dot(PVector.sub(vel, otherBall.vel), PVector.sub(otherBall.pos, pos)) > 0)
-		{
+		// https://matthew-brett.github.io/teaching/rotation_2d.html#equation-x-1-y-1
+		// https://codepen.io/Full_of_Symmetries/pen/qqazdW?editors=0010#0
+		if (d <= (size + otherBall.size) * 0.5 && PVector.dot(PVector.sub(vel, otherBall.vel), PVector.sub(otherBall.pos, pos)) > 0) {
 			float tempx, tempy;
 			tempx = vel.x;
 			tempy = vel.y;
-			//println("collide!");
+			// println("collide!");
 			hu = random(360);
 			otherBall.hu = hu;
 			float theta = -atan2(otherBall.pos.y - pos.y, otherBall.pos.x - pos.x);
@@ -73,55 +68,56 @@ class Ball
 			vel.set(u1);
 			otherBall.vel.set(u2);
 
-			//vel.x = (vel.x * (mass - otherBall.mass) +
-			//  (2 * otherBall.mass * otherBall.vel.x))
-			//  / (mass + otherBall.mass);
-			//vel.y = (vel.y * (mass - otherBall.mass) +
-			//  (2 * otherBall.mass * otherBall.vel.y))
-			//  / (mass + otherBall.mass);
-			//otherBall.vel.x = (otherBall.vel.x * (otherBall.mass - mass) +
-			//  (2 * mass * tempx))
-			//  / (mass + otherBall.mass);
-			//otherBall.vel.y = (otherBall.vel.y * (otherBall.mass - mass) +
-			//  (2 * mass * tempy))
-			//  / (mass + otherBall.mass);
+			// vel.x = (vel.x * (mass - otherBall.mass) +
+			// (2 * otherBall.mass * otherBall.vel.x))
+			/// (mass + otherBall.mass);
+			// vel.y = (vel.y * (mass - otherBall.mass) +
+			// (2 * otherBall.mass * otherBall.vel.y))
+			/// (mass + otherBall.mass);
+			// otherBall.vel.x = (otherBall.vel.x * (otherBall.mass - mass) +
+			// (2 * mass * tempx))
+			/// (mass + otherBall.mass);
+			// otherBall.vel.y = (otherBall.vel.y * (otherBall.mass - mass) +
+			// (2 * mass * tempy))
+			/// (mass + otherBall.mass);
 
-			//vel.x = otherBall.vel.x;
-			//vel.y = otherBall.vel.y;
-			//otherBall.vel.x = tempx;
-			//otherBall.vel.y = tempy;
+			// vel.x = otherBall.vel.x;
+			// vel.y = otherBall.vel.y;
+			// otherBall.vel.x = tempx;
+			// otherBall.vel.y = tempy;
 
-			//pos.add(vel);
-			//otherBall.pos.add(otherBall.vel);
+			// pos.add(vel);
+			// otherBall.pos.add(otherBall.vel);
 
-			//HACK: seperate two balls by magic
-			//int dirx, diry;
-			//dirx = pos.x <= otherBall.pos.x ? 1 : -1;
-			//diry = pos.y <= otherBall.pos.y ? 1 : -1;
-			//otherBall.pos.x += sqrt(d) * dirx;
-			//otherBall.pos.y += sqrt(d) * diry;
-			//float dx = otherBall.pos.x - pos.x;
-			//float dy = otherBall.pos.y - pos.y;
-			//d = d > 0 ? d : 0.0000001;
-			//float dsdd = (size + otherBall.size) / (2 * d);
-			//otherBall.pos.x = pos.x + (dx * dsdd);
-			//otherBall.pos.y = pos.y + (dy * dsdd);
+			// HACK: seperate two balls by magic
+			// int dirx, diry;
+			// dirx = pos.x <= otherBall.pos.x ? 1 : -1;
+			// diry = pos.y <= otherBall.pos.y ? 1 : -1;
+			// otherBall.pos.x += sqrt(d) * dirx;
+			// otherBall.pos.y += sqrt(d) * diry;
+			// float dx = otherBall.pos.x - pos.x;
+			// float dy = otherBall.pos.y - pos.y;
+			// d = d > 0 ? d : 0.0000001;
+			// float dsdd = (size + otherBall.size) / (2 * d);
+			// otherBall.pos.x = pos.x + (dx * dsdd);
+			// otherBall.pos.y = pos.y + (dy * dsdd);
 			// PVector pushBall = PVector.sub(otherBall.pos, pos).normalize();
-			//float dVec = map(d, 0, (size+otherBall.size)/2, 1, 0);
-			//float dVec = 1 - (d/((size+otherBall.size)/2));
-			//pushBall.mult(dVec);
+			// float dVec = map(d, 0, (size+otherBall.size)/2, 1, 0);
+			// float dVec = 1 - (d/((size+otherBall.size)/2));
+			// pushBall.mult(dVec);
 			// pushBall.mult((size + otherBall.size) / (2 * d));
 			// otherBall.pos.add(pushBall);
 		}
 	}
 
-	void applyForce(PVector force)
-	{
+	void
+	applyForce(PVector force) {
 		acc.add(force);
 	}
 
-	void show()
-	{
+	void
+	show() {
+		noStroke();
 		fill(hu, 255, 255);
 		ellipse(pos.x, pos.y, size, size);
 	}
